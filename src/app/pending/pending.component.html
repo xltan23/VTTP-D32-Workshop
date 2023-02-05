@@ -1,0 +1,18 @@
+<h3>Pending Tasks</h3>
+
+<!-- Task array is empty -->
+<div *ngIf="tasks.length<=0">
+    <span>You have no pending tasks</span>
+</div>
+
+<div *ngIf="tasks.length>0">
+    <div *ngFor="let t of tasks">
+        <h4>{{ t.description }}</h4>
+        <div>
+            <span>Priority: {{ t.priority }}</span>
+            <br>
+            <span>Due Date: {{ t.due }}</span>
+        </div>
+        <button type="button" (click)="shiftToComplete(t)">Completed</button>
+    </div>
+</div>

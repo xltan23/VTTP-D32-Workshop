@@ -1,0 +1,16 @@
+<h3>Completed Tasks</h3>
+
+<div *ngIf="completedTasks.length<=0">
+    <span>You have no completed tasks</span>
+</div>
+
+<div *ngIf="completedTasks.length>0">
+    <div *ngFor="let t of completedTasks">
+        <h4>{{ t.description }}</h4>
+        <div>
+            <span>Priority: {{ t.priority }}</span>
+            <br>
+            <span>Due Date: {{ t.due }}</span>
+        </div>
+    </div>
+</div>

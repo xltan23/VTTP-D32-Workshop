@@ -1,0 +1,53 @@
+<!-- formGroup controls are binded to todoForm -->
+<form [formGroup]="todoForm" (ngSubmit)="processForm()">
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td>
+                <!-- Tie control name to 'name' -->
+                <input type="text" placeholder="Name" size="30" formControlName="name">
+                <div *ngIf="todoForm.get('name')?.invalid && todoForm.get('name')?.dirty">
+                    Please enter your name
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="button" (click)="clearForm()">Clear</button>
+                <button type="submit" [disabled]="invalid()">Save</button>
+                <button type="button" (click)="addTodo()">Add TODO</button>
+            </td>
+        </tr>
+    </table>
+
+    <table *ngIf="taskArray.controls.length>0">
+        <thead>
+            <th>Task</th>
+            <th>Priority</th>
+            <th>Due Date</th>
+        </thead>
+        <!-- Tie entire array to 'tasks' -->
+        <tbody formArrayName="tasks">
+            <!-- Bind each form group in array to an index (For ease of removal) -->
+            <tr *ngFor="let t of taskArray.controls; let i = index" [formGroupName]="i">
+                <td>
+                    <!-- Tie control name to 'description' -->
+                    <input type="text" size="30" placeholder="Task name" formControlName="description">
+                </td>
+                <td>
+                    <!-- Tie control name to 'priority' -->
+                    <input type="radio" [value]="'low'" formControlName="priority"> Low
+                    <input type="radio" [value]="'med'" formControlName="priority"> Medium
+                    <input type="radio" [value]="'high'" formControlName="priority"> High
+                </td>
+                <td>
+                    <!-- Tie control name to 'due' -->
+                    <input type="text" size="30" placeholder="Due Date" formControlName="due">
+                </td>
+                <td>
+                    <button type="button" (click)="removeTask(i)">X</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>

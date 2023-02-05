@@ -1,0 +1,10 @@
+.side-to-side {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.center-it {
+    display: flex;
+    justify-content: center;
+}
